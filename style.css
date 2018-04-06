@@ -10,8 +10,16 @@ ul{
     list-style: none;
     padding: 0;
 }
+#transparent-wrapper{
+    /* background: red; */
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    z-index: 100;
+}
 #ui-panel{
     /* background: #0000006e; */
+    z-index: 200;
     display: inline-block;
     padding: 40px;
     left: 30px;
@@ -21,7 +29,6 @@ ul{
 
 #indicator {
     border: 1px solid white;
-    /* z-index: -2; */
     line-height: 60px;
     border-radius: 40px;
     padding: 20px 40px;

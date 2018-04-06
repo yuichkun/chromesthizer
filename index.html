@@ -13,7 +13,8 @@
 </head>
 
 <body>
-    <div id="ui-panel">
+    <div id="transparent-wrapper" ondrop="converter.onDrop(event)" ondragover="converter.onDrag(event)" ></div>
+    <div id="ui-panel" ondrop="converter.onDrop(event)" ondragover="converter.onDrag(event)">
         <h1>Image to Sound Converter</h1>
         <ul>
             <li>
@@ -44,7 +45,7 @@
         <a id="download">
             <button>Download Sound</button>
         </a>
-        <button onclick="converter.uiManager.jiggle(2000);">jiggle</button>
+        <button onclick="converter.uiManager.randomize();">Randomize</button>
     </div>
     <div id="indicator">
         <span class="jp">画像をここにドロップしてね</span>
@@ -53,7 +54,8 @@
         <br>
         <span class="en">Drop an image file here!</span>
     </div>
-    <canvas id="canvas" ondrop="converter.onDrop(event)" ondragover="converter.onDrag(event)"></canvas>
+    <canvas id="canvas"></canvas>
+    <script src="encoder.js"></script>
     <script src="util.js"></script>
     <script src="UIManager.js"></script>
     <script src="CanvasManager.js"></script>

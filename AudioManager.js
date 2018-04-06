@@ -5,23 +5,30 @@ class AudioManager {
 
         const downloadButton = document.getElementById("download");
         downloadButton.onclick = () => {
-            this.saveFile(this);
+            this.saveFile(downloadButton);
         };
 
     }
-    saveFile() {
-        console.log("saving file", this);
-        const blob = new Blob(this.audioSource.buffer, { type: "audio/wave" });
-        // console.log('b', blob);
-        // const url = window.URL.createObjectURL(blob);
-        // const url = window.URL.createObjectURL(this.audioSource.buffer);
-        // downloadButton.href = url;
+    saveFile(downloadButton) {
+        console.log("Saving file");
+        const { buffer } = this.audioSource; 
+        const wav = audioBufferToWav(buffer);
+        const blob = new Blob([new DataView(wav)], {
+            type: "audio/wav"
+        });
+        const url = window.URL.createObjectURL(blob);
+        downloadButton.href = url;
+        downloadButton.download = "audio.wav";
+        downloadButton.click();
+        // window.URL.revokeObjectURL(url)
+        console.log(url);
     }
     init(pixels) {
         const buffer = this.convertImageToSound(pixels);
         this.audioSource = this.createAudioSource(buffer);
     }
     playSound(loop) {
+        console.log(this.audioSource);
         this.audioSource.loop = loop;
         this.audioSource.start(this.audioContext.currentTime);
     }
@@ -68,7 +75,8 @@ class AudioManager {
             const pixel = pixels[i]
             const [h, s, l] = pixel;
             const brightness = normalize(l); 
-            let saturation = 0.0;
+            let saturation = ((Math.random() * 2.0) - 1.0) * 0.01;
+            saturation = 0;
             let sample = brightness + saturation;
             sample = limiter(sample);
             data[2 * i] = sample;

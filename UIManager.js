@@ -27,11 +27,12 @@ class UIManager {
         const { config } = this;
         config[name] = value;
     }
+    randomize() { 
+        this.sliders.forEach(this.setRandomValue.bind(this));
+    }
 
     jiggle(time) { 
-        this.jiggling = setInterval(() => { 
-            this.sliders.forEach(this.setRandomValue.bind(this));
-        }, time);
+        this.jiggling = setInterval(this.randomize.bind(this), time);
     }
 
 }
