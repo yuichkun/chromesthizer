@@ -1,0 +1,39 @@
+body{
+    margin: 0;
+    padding: 0;
+    background: black;
+    /* color: #cacaca; */
+    color: #e4e4e4;
+    font-family: 'Roboto';
+}
+ul{
+    list-style: none;
+    padding: 0;
+}
+#ui-panel{
+    /* background: #0000006e; */
+    display: inline-block;
+    padding: 40px;
+    left: 30px;
+    top: 30px;
+    position: fixed;
+}
+
+#indicator {
+    border: 1px solid white;
+    /* z-index: -2; */
+    line-height: 60px;
+    border-radius: 40px;
+    padding: 20px 40px;
+    position: fixed;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+#canvas{
+    /* background: red; */
+    width: 100vw;
+    min-height: 100vh;
+}
+

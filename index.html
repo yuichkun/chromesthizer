@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Chromesthizer</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div id="ui-panel">
+        <h1>Image to Sound Converter</h1>
+        <ul>
+            <li>
+                <h3>Brightness</h3>
+                <input type="range" min="0" max="200" value="100" id="brightness">
+            </li>
+            <li>
+                <h3>Hue</h3>
+                <input type="range" min="0" max="360" value="0" id="hue">
+            </li>
+            <li>
+                <h3>Saturation</h3>
+                <input type="range" min="0" max="200" value="100" id="saturation">
+            </li>
+            <li>
+                <h3>Blur</h3>
+                <input type="range" min="0" max="15" value="0" id="blur">
+            </li>
+            <li>
+                <h3>Contrast</h3>
+                <input type="range" min="0" max="200" value="100" id="contrast">
+            </li>
+            <li>
+                <h3>Sample Rate</h3>
+                <input type="range" min="3000" max="38400" value="44000" id="sampleRate">
+            </li>
+        </ul>
+        <a id="download">
+            <button>Download Sound</button>
+        </a>
+        <button onclick="converter.uiManager.jiggle(2000);">jiggle</button>
+    </div>
+    <div id="indicator">
+        <span class="jp">画像をここにドロップしてね</span>
+        <br>
+        <i class="fas fa-10x fa-file"></i>
+        <br>
+        <span class="en">Drop an image file here!</span>
+    </div>
+    <canvas id="canvas" ondrop="converter.onDrop(event)" ondragover="converter.onDrag(event)"></canvas>
+    <script src="util.js"></script>
+    <script src="UIManager.js"></script>
+    <script src="CanvasManager.js"></script>
+    <script src="AudioManager.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
