@@ -5,7 +5,7 @@ function toRGB(pixels) {
     //     rgbPixels.push(pixel);
     // }
   for (let i = 0; i < pixels.length; i++) { 
-    if (i % 4 != 0) { 
+    if (i % 4 != 3) { 
       rgbPixels.push(pixels[i]);
     }
   }
