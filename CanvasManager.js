@@ -11,12 +11,11 @@ class CanvasManager {
     }
     render() { 
         const { context, canvas, baseImage } = this;
-        const filter = this.composeFilter();
-        console.log(filter);
-        context.filter = filter;
+        context.filter = this.composeFilter();
         context.drawImage(baseImage, 0, 0, canvas.width, canvas.height);
         const rawPixels = context.getImageData(0, 0, canvas.width, canvas.height).data;
-        const pixels = toRGB(rawPixels).map(toHSL);
+        // const pixels = toRGB(rawPixels).map(toHSL);
+        const pixels = toRGB(rawPixels);
 
         return pixels;
     }

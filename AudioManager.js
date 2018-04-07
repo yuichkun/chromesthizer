@@ -21,7 +21,6 @@ class AudioManager {
         downloadButton.download = "audio.wav";
         downloadButton.click();
         // window.URL.revokeObjectURL(url)
-        console.log(url);
     }
     init(pixels) {
         const buffer = this.convertImageToSound(pixels);
@@ -55,7 +54,7 @@ class AudioManager {
     }
     convertImageToSound(pixels) {
         const { audioContext } = this;
-        const buffer = audioContext.createBuffer(2, pixels.length*2, this.sampleRate);
+        const buffer = audioContext.createBuffer(2, pixels.length, this.sampleRate);
         for (let ch = 0; ch < 2; ch++) {
             let data = buffer.getChannelData(ch);
             this.genSamples(data, pixels);
@@ -68,19 +67,11 @@ class AudioManager {
             return Math.max(-1.0, Math.min(1.0, source));
         }
         function normalize(sample) { 
-            return (sample * 2.0) - 1.0;
+            return ((sample / 255) * 2) - 1.0;
         }
-        const bufferSize = 1200;
         for (let i = 0; i < pixels.length; i++) { 
-            const pixel = pixels[i]
-            const [h, s, l] = pixel;
-            const brightness = normalize(l); 
-            let saturation = ((Math.random() * 2.0) - 1.0) * 0.01;
-            saturation = 0;
-            let sample = brightness + saturation;
-            sample = limiter(sample);
-            data[2 * i] = sample;
-            data[(2 * i) + 1] = sample * -1;
+            let sample = pixels[i]; 
+            data[i] = normalize(sample);
         }
     }
 }

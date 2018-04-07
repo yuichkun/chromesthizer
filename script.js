@@ -1,6 +1,5 @@
 class Converter {
     constructor() {
-        console.log("hello");
         this.config = {
             imgPath: "",
             blur: 0,
@@ -23,7 +22,6 @@ class Converter {
     }
     async init() {
         const { config, audioManager, canvasManager } = this;
-        console.log("Init");
         canvasManager.updateConfig(config);
         const pixels = await canvasManager.extractPixels(config);
         audioManager.stopSound();
