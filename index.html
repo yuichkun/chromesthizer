@@ -7,54 +7,67 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Chromesthizer</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="slider.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/earlyaccess/mplus1p.css" rel="stylesheet" />
     <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl"
         crossorigin="anonymous"></script>
 </head>
 
 <body>
-    <div id="transparent-wrapper" ondrop="converter.onDrop(event)" ondragover="converter.onDrag(event)" ></div>
-    <div id="ui-panel" ondrop="converter.onDrop(event)" ondragover="converter.onDrag(event)">
-        <h1>Image to Sound Converter</h1>
-        <ul>
-            <li>
-                <h3>Brightness</h3>
-                <input type="range" min="0" max="200" value="100" id="brightness">
-            </li>
-            <li>
-                <h3>Hue</h3>
-                <input type="range" min="0" max="360" value="0" id="hue">
-            </li>
-            <li>
-                <h3>Saturation</h3>
-                <input type="range" min="0" max="200" value="100" id="saturation">
-            </li>
-            <li>
-                <h3>Blur</h3>
-                <input type="range" min="0" max="15" value="0" id="blur">
-            </li>
-            <li>
-                <h3>Contrast</h3>
-                <input type="range" min="0" max="200" value="100" id="contrast">
-            </li>
-            <li>
-                <h3>Sample Rate</h3>
-                <input type="range" min="3000" max="38400" value="44000" id="sampleRate">
-            </li>
-        </ul>
-        <a id="download">
-            <button>Download Sound</button>
-        </a>
-        <button onclick="converter.uiManager.randomize();">Randomize</button>
+    <div id="transparent-wrapper" ondrop="converter.onDrop(event)" ondragover="converter.onDrag(event)">
+        <canvas id="canvas"></canvas>
+        <div id="wrapper">
+            <div id="ui-panel" ondrop="converter.onDrop(event)" ondragover="converter.onDrag(event)">
+                <div id="header">
+                    <h1>Chromesthizer</h1> <span>色で音をつくるシンセサイザー</span>
+                </div>
+                <ul>
+                    <li>
+                        <h3>Brightness</h3>
+                        <input type="range" min="0" max="200" value="100" id="brightness">
+                    </li>
+                    <li>
+                        <h3>Hue</h3>
+                        <input type="range" min="0" max="360" value="0" id="hue">
+                    </li>
+                    <li>
+                        <h3>Saturation</h3>
+                        <input type="range" min="0" max="200" value="100" id="saturation">
+                    </li>
+                    <li>
+                        <h3>Blur</h3>
+                        <input type="range" min="0" max="15" value="0" id="blur">
+                    </li>
+                    <li>
+                        <h3>Contrast</h3>
+                        <input type="range" min="0" max="200" value="100" id="contrast">
+                    </li>
+                    <li>
+                        <h3>Sample Rate</h3>
+                        <input type="range" min="3000" max="38400" value="44000" id="sampleRate">
+                    </li>
+                </ul>
+                <div id="bottom">
+                    <button onclick="converter.uiManager.randomize();">Randomize</button>
+                    <a id="download">
+                        <button>Download Sound</button>
+                    </a>
+                </div>
+            </div>
+            <div id="indicator">
+                <div id="box">
+                    <span class="jp">画像をここにドロップしてね</span>
+                    <br>
+                    <i class="fas fa-10x fa-file"></i>
+                    <br>
+                    <span class="en">Drop an image file here!</span>
+                </div>
+            </div>
+        </div>
     </div>
-    <div id="indicator">
-        <span class="jp">画像をここにドロップしてね</span>
-        <br>
-        <i class="fas fa-10x fa-file"></i>
-        <br>
-        <span class="en">Drop an image file here!</span>
-    </div>
-    <canvas id="canvas"></canvas>
+
+
     <script src="encoder.js"></script>
     <script src="util.js"></script>
     <script src="UIManager.js"></script>
