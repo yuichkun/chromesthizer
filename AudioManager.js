@@ -10,7 +10,7 @@ class AudioManager {
 
     }
     saveFile(downloadButton) {
-        console.log("Saving file");
+        // console.log("Saving file");
         const { buffer } = this.audioSource; 
         const wav = audioBufferToWav(buffer);
         const blob = new Blob([new DataView(wav)], {
@@ -27,14 +27,13 @@ class AudioManager {
         this.audioSource = this.createAudioSource(buffer);
     }
     playSound(loop) {
-        console.log(this.audioSource);
         this.audioSource.loop = loop;
         this.audioSource.start(this.audioContext.currentTime);
     }
     stopSound() {
         const { audioContext, audioSource, gainNode } = this;
         if (audioSource) {
-            gainNode.gain.setValueAtTime(0, audioContext.currentTime + 0.1);
+            gainNode.gain.setValueAtTime(0, audioContext.currentTime + 0.01);
         }
     }
     createGain() {
@@ -47,7 +46,7 @@ class AudioManager {
         const audioSource = audioContext.createBufferSource();
         audioSource.buffer = buffer;
         const gainNode = this.createGain();
-        gainNode.gain.value = 0.1;
+        // gainNode.gain.value = 0.1;
         audioSource.connect(gainNode);
         gainNode.connect(audioContext.destination);
         return audioSource;
@@ -58,7 +57,7 @@ class AudioManager {
         for (let ch = 0; ch < 2; ch++) {
             let data = buffer.getChannelData(ch);
             this.genSamples(data, pixels);
-            console.log(ch, data, data.length);
+            // console.log(ch, data, data.length);
         }
         return buffer;
     }
