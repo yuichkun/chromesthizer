@@ -15,7 +15,7 @@ class CanvasManager {
         context.drawImage(baseImage, 0, 0, canvas.width, canvas.height);
         const rawPixels = context.getImageData(0, 0, canvas.width, canvas.height).data;
         // const pixels = toRGB(rawPixels).map(toHSL);
-        const pixels = toRGB(rawPixels);
+        const pixels = toRGB(rawPixels, baseImage.width, baseImage.height);
 
         return pixels;
     }
@@ -40,7 +40,7 @@ class CanvasManager {
             baseImage.onload =  () => {
                 this.resizeCanvas();
                 const pixels = this.render();
-                console.log("Pixels", pixels);
+                // console.log("Pixels", pixels);
                 resolve(pixels);
             };
             baseImage.onerror = reject;

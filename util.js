@@ -1,17 +1,22 @@
-function toRGB(pixels) {
-    let rgbPixels = [];
-    // for (let i = 0; i < pixels.length; i += 4) {
-    //     const pixel = pixels.subarray(i, i + 3);
-    //     rgbPixels.push(pixel);
-    // }
-  for (let i = 0; i < pixels.length; i++) { 
-    if (i % 4 != 3) { 
-      rgbPixels.push(pixels[i]);
+function toRGB(pixels, width, height) {
+  let ret = [];
+  for (let y = 0; y < height; y++) {
+    for (let x = 0; x < width; x++) {
+      const b = y * (width * 4);
+      const isEvenRow = y % 2 === 0;
+      const _x = isEvenRow ? x : (width - x) - 1;
+      const pos = 4 * _x + b;
+      for (let i = 0; i < 4; i++) {
+        const isAlpha = i % 4 === 3;
+        if (!isAlpha) {
+          const index = pos + i;
+          ret.push(pixels[index]);
+        }
+      }
     }
   }
-    return rgbPixels;
+  return ret;
 }
-
 function toHSL(pixel) {
     let [r, g, b] = pixel; 
 
