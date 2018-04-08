@@ -1,6 +1,7 @@
 class Converter {
     constructor() {
-        this.config = {
+        this.config = {};
+        this.initialConfig = {
             imgPath: "",
             blur: 0,
             brightness: 100,
@@ -11,17 +12,21 @@ class Converter {
         }
         this.audioManager = new AudioManager();
         this.canvasManager = new CanvasManager();
-        const proxyConfig = new Proxy(this.config, {
+        this.uiManager = new UIManager();
+    }
+    proxifyConfig() {
+        return new Proxy(this.config, {
             set: (obj, prop, value) => { 
                 this.init();
-                console.log(obj);
+                // console.log("change value ", obj);
                 return Reflect.set(obj, prop, value);
             }
         });
-        this.uiManager = new UIManager(proxyConfig);
     }
     async init() {
         const { config, audioManager, canvasManager } = this;
+        // console.log("init ", config);
+        this.uiManager.setConfig(this.proxifyConfig());
         canvasManager.updateConfig(config);
         const pixels = await canvasManager.extractPixels(config);
         audioManager.stopSound();
@@ -39,9 +44,9 @@ class Converter {
             const reader = new FileReader();
             reader.readAsDataURL(file);
             reader.onload = (e2) => {
-                const img = e2.target.result;
-                const { config } = this;
-                config.imgPath = img;
+                const imgPath = e2.target.result;
+                const base = JSON.parse(JSON.stringify(this.initialConfig));
+                this.config = Object.assign(base, {imgPath});
                 this.init();
             };
         }
