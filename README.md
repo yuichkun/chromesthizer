@@ -1,8 +1,7 @@
 # Chromesthizer
 
 ![Chromesthizer Demo](./chromesthizer.gif)
-
-Demo: https://chromesthizer.vercel.app/
+[🔗 Demo](https://chromesthizer.vercel.app/)
 
 A unique audio-visual experiment that transforms images into sound using Web Audio API. Upload any image and hear what it sounds like! The application analyzes the pixel data of your image and converts it into audio waveforms, creating a unique sonic representation of visual content.
 
